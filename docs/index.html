@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Widget Test</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <!-- Container for your widget -->
+  <div id="search-widget-container"></div>
+  
+  <!-- Just load your widget script which now includes React -->
+  <script src="./search-widget.umd.js"></script>
+  
+  <script>
+    window.onload = function() {
+      if (window.SearchWidget && window.SearchWidget.renderSearchWidget) {
+        window.SearchWidget.renderSearchWidget('search-widget-container');
+      } else {
+        console.error("SearchWidget not loaded correctly");
+      }
+    };
+  </script>
+</body>
+</html>
