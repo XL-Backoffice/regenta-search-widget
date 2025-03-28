@@ -680,8 +680,7 @@ const SearchWidget = () => {
                         />
                       </Link> */}
                     </div>
-                    <div
-                      className="xl:col-span-3 cursor-pointer relative pr-4 pl-4 xl:pl-8 mt-2.5 xl:mt-6 xl:mb-1 separator-line search-stikey-hot"
+                    <div className="xl:col-span-3 cursor-pointer relative pr-4 pl-4 xl:pl-8 mt-2.5 xl:mt-6 xl:mb-1 separator-line search-stikey-hot"
                       onClick={() => setOpenHotel(true)}
                     >
                       <div className="flex items-center pr-2">
@@ -810,7 +809,7 @@ const SearchWidget = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="xl:col-span-2 mobi_hide mt-6 mb-1 cursor-pointer search-stikey-roomguest separator-line">
+                    <div className="xl:col-span-3 mobi_hide mt-6 mb-1 cursor-pointer search-stikey-roomguest">
                       <div>
                         <Popover className="relative">
                           <PopoverButton className="outline-0">
@@ -1003,7 +1002,7 @@ const SearchWidget = () => {
                         </Popover>
                       </div>
                     </div>
-                    <div className="xl:col-span-2 mobi_hide mt-6 mb-1 cursor-pointer search-stikey-roomguest">
+                    {/* <div className="xl:col-span-2 mobi_hide mt-6 mb-1 cursor-pointer search-stikey-roomguest">
                       <Popover className="relative">
                         <PopoverButton className="outline-0">
                           <div className="cursor-pointer flex items-center">
@@ -1024,32 +1023,32 @@ const SearchWidget = () => {
                           </div>
                         </PopoverButton>
 
-                        {/* <PopoverPanel
-                                transition
-                                className="absolute left-1/2 z-50 mt-5 w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in box-border bg-content1 rounded-large shadow-medium min-w-[200px]"
-                              >
-                                <div className="room_loop_wrap border-t mb-2 pt-4">
-                                  <Label text="Enter Corporate Code" />
-                                  <InputField
-                                    value={tempCode}
-                                    onChange={(e) => setTempCode(e?.target?.value)}
-                                    placeholder="Add Corporate Code"
-                                    className="inputfield_border rounded-full w-full"
-                                  />
-                                </div>
-            
-                                <div className="text-right pb-4 border-t pt-3 border-gray-200 mt-3">
-                                  <PopoverButton className="outline-0">
-                                    <FillButton
-                                      text="Add"
-                                      onClick={() => checkCorporateCode()}
-                                      className="fill_btn pb-2"
-                                    />
-                                  </PopoverButton>
-                                </div>
-                              </PopoverPanel> */}
+                        <PopoverPanel
+                          transition
+                          className="absolute left-1/2 z-50 mt-5 w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in box-border bg-content1 rounded-large shadow-medium min-w-[200px]"
+                        >
+                          <div className="room_loop_wrap border-t mb-2 pt-4">
+                            <Label text="Enter Corporate Code" />
+                            <InputField
+                              value={tempCode}
+                              onChange={(e) => setTempCode(e?.target?.value)}
+                              placeholder="Add Corporate Code"
+                              className="inputfield_border rounded-full w-full"
+                            />
+                          </div>
+
+                          <div className="text-right pb-4 border-t pt-3 border-gray-200 mt-3">
+                            <PopoverButton className="outline-0">
+                              <FillButton
+                                text="Add"
+                                onClick={() => checkCorporateCode()}
+                                className="fill_btn pb-2"
+                              />
+                            </PopoverButton>
+                          </div>
+                        </PopoverPanel>
                       </Popover>
-                    </div>
+                    </div> */}
                     <div className="xl:col-span-2 mobi_hide">
                       <button
                         type="button"

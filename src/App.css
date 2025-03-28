@@ -186,7 +186,7 @@ body {
   white-space: nowrap;
 }
 .home-search-wrap .search-stikey-hot {
-  grid-column: span 3 / span 3;
+  grid-column: span 4 / span 4;
 }
 .search_mappin_inc {
   width: 30px;
