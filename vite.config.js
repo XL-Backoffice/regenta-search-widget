@@ -1,9 +1,9 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
     plugins: [svgr(), react()],
@@ -24,8 +24,21 @@ export default defineConfig(({ mode }) => {
         // Remove the external line to bundle React with your widget
         output: {
           name: "named",
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name === "style.css") return "search-widget.css";
+            return assetInfo.name;
+          },
+        },
+      },
+      cssCodeSplit: false,
+    },
+    css: {
+      // Options for CSS processing
+      preprocessorOptions: {
+        css: {
+          includePaths: ["src"],
         },
       },
     },
   });
-})
+});

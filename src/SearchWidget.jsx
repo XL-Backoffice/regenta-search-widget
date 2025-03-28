@@ -685,9 +685,9 @@ const SearchWidget = () => {
                       onClick={() => setOpenHotel(true)}
                     >
                       <div className="flex items-center pr-2">
-                        {/* <span className="search_mappin_inc">
+                        <span className="search_mappin_inc">
                           <MapPinIcon className="mr-2 sm:mr-4 secondary-color w-6" />
-                        </span> */}
+                        </span>
                         <div className="w-full pr-3">
                           <label className="primary-color truncate text-sm lg:text-base">
                             Explore & Save
