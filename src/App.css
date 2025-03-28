@@ -1,8 +1,8 @@
 
 @font-face {
   font-family: "Helvetica-Neue-Bold";
-  src: url("/fonts/HelveticaNeue-Bold.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue-Bold.woff") format("woff");
+  src: url("../public/fonts/HelveticaNeue-Bold.woff2") format("woff2"),
+       url("../public/fonts/HelveticaNeue-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -10,8 +10,8 @@
 
 @font-face {
   font-family: "Helvetica-Neue-Medium";
-  src: url("/fonts/HelveticaNeue-Medium.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue-Medium.woff") format("woff");
+  src: url("../public/fonts/HelveticaNeue-Medium.woff2") format("woff2"),
+       url("../public/fonts/HelveticaNeue-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -19,8 +19,8 @@
 
 @font-face {
   font-family: "Helvetica-Neue-Regular";
-  src: url("/fonts/HelveticaNeue-Roman.woff2") format("woff2"),
-    url("/fonts/HelveticaNeue-Roman.woff") format("woff");
+  src: url("../public/fonts/HelveticaNeue-Roman.woff2") format("woff2"),
+       url("../public/fonts/HelveticaNeue-Roman.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -89,10 +89,10 @@ body {
 }
 .checkin_date .-mx-1{ visibility: hidden;}
 .separator-line {
-  background: url(/images/separator.png) no-repeat right 3px;
+  background: url("../public/images/separator.png") no-repeat right 3px;
 }
 .separator-line-date {
-  background: url(/images/separator.png) no-repeat right 27px;
+  background: url("../public/images/separator.png") no-repeat right 27px;
 }
 .home_leftspacelab {
   padding-left: 31px;
