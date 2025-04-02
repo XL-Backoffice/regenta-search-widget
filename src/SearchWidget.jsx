@@ -72,7 +72,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const SearchWidget = () => {
+const SearchWidget = ({ initialValue }) => {
   const [searchFields, setSearchFields] = useState({
     rooms: 1,
     children: 0,
@@ -123,19 +123,45 @@ const SearchWidget = () => {
     return `${year}-${month}-${day}`;
   };
   useEffect(() => {
-    const today = new Date();
-    const futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + 1);
-    const checkIn = formatDate(today);
-    const checkOut = formatDate(futureDate);
-    setSearchFields({ ...searchFields, checkIn, checkOut })
-    setSearchDate({
-      start: parseDate(checkIn),
-      end: parseDate(checkOut)
-    })
+    configuration
+      .getAPI({ url: "api/common/hotel-list", params: {} })
+      .then((data) => {
+        if (data?.payload) {
+          setProjects(data?.payload);
+          const popular = data?.payload?.filter((single) => single?.isPopular);
+          setPopularHotel(popular);
+          const selectedHotel = data?.payload?.find((single) => single?.propertyId == initialValue)
+          if (selectedHotel) {
+            const today = new Date();
+            const futureDate = new Date(today);
+            futureDate.setDate(today.getDate() + 1);
+            const checkIn = formatDate(today);
+            const checkOut = formatDate(futureDate);
+            setSearchFields({
+              ...searchFields,
+              hotel: selectedHotel?.name,
+              hotelID: selectedHotel?._id,
+              searchType: "hotel",
+              corporateCode: "",
+              checkIn, checkOut
+            });
+            setSearchDate({
+              start: parseDate(checkIn),
+              end: parseDate(checkOut)
+            })
+          }
+
+        } else if (data?.error) {
+          return toast.error(data?.error?.message);
+        } else {
+          return toast.error("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        return toast.error(error?.message);
+      });
   }, []);
   useEffect(() => {
-    getHotels();
     // getCities();
     window.addEventListener("scroll", () => {
       if (window.scrollY < 15) {
@@ -154,6 +180,17 @@ const SearchWidget = () => {
           setProjects(data?.payload);
           const popular = data?.payload?.filter((single) => single?.isPopular);
           setPopularHotel(popular);
+          const selectedHotel = data?.payload?.find((single) => single?.propertyId == initialValue)
+          if (selectedHotel) {
+            setSearchFields({
+              ...searchFields,
+              hotel: selectedHotel?.name,
+              hotelID: selectedHotel?._id,
+              searchType: "hotel",
+              corporateCode: "",
+            });
+          }
+
         } else if (data?.error) {
           return toast.error(data?.error?.message);
         } else {
@@ -1592,7 +1629,7 @@ const SearchWidget = () => {
 // export default SearchWidget;
 
 // Separate the render function
-export function renderSearchWidget(containerId) {
+export function renderSearchWidget(containerId, initialValue = "") {
   console.log('Attempting to render in container:', containerId);
 
   try {
@@ -1601,7 +1638,7 @@ export function renderSearchWidget(containerId) {
     if (container) {
       console.log('Container found, attempting to create root');
       const root = createRoot(container);
-      root.render(<SearchWidget />);
+      root.render(<SearchWidget initialValue={initialValue} />);
       console.log('✅ Widget mounted successfully');
     } else {
       console.error(`❌ Container with ID '${containerId}' not found`);

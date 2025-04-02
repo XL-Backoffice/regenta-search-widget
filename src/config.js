@@ -1,44 +1,37 @@
-import axios from 'axios';
-const baseURL = import.meta.env.VITE_BASE_URL
-const mapAPIKey = import.meta.env.VITE_MAP_API_KEY
-const eassyBaseURL = import.meta.env.VITE_EASSY_BASE_URL
-const eassyChannelID = import.meta.env.VITE_EASSY_CHANNEL_ID
-const cryptoData = {
-  iv:import.meta.env.VITE_IV,
-  key:import.meta.env.VITE_KEY,
-  salt:import.meta.env.VITE_SALT
-}
+import axios from "axios";
+const baseURL = import.meta.env.VITE_BASE_URL;
 const config = {
   appName: import.meta.env.VITE_APP_TITLE,
   baseURL,
-  mapAPIKey,
-  cryptoData,
-  eassyBaseURL,
-  eassyChannelID,
-
   getAPI(data) {
     return new Promise((resolve, reject) => {
-      let url = new URL(`${baseURL}${data.url}`)
-      url.search = new URLSearchParams({ ...data.params, lang_code: 'EN' }).toString();
-      fetch(url).then((response) => {
-        if (response?.status === 401) {
-          localStorage.removeItem('user_id');
-          localStorage.removeItem('email');
-          localStorage.removeItem("token");
-          if (window.location.pathname !== "/") window.location.href = "/";
+      let url = new URL(`${baseURL}${data.url}`);
+      url.search = new URLSearchParams({
+        ...data.params,
+        lang_code: "EN",
+      }).toString();
+      fetch(url)
+        .then((response) => {
+          if (response?.status === 401) {
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("email");
+            localStorage.removeItem("token");
+            if (window.location.pathname !== "/") window.location.href = "/";
+            return;
+          } else {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          resolve(data);
           return;
-        } else {
-          return response.json();
-        }
-      }).then((data) => {
-        resolve(data)
-        return;
-      }).catch(error => {
-        // console.log(error)
-        reject(error)
-        return;
-      });
-    })
+        })
+        .catch((error) => {
+          // console.log(error)
+          reject(error);
+          return;
+        });
+    });
   },
   postAPI(data) {
     return new Promise((resolve, reject) => {
@@ -46,60 +39,66 @@ const config = {
       fetch(`${baseURL}${data.url}`, {
         method: "post",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': (retrievedObject) ? retrievedObject : ''
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: retrievedObject ? retrievedObject : "",
         },
-        body: JSON.stringify({ ...data.params, lang_code: 'EN' })
-      }).then((response) => {
-        if (response?.status === 401) {
-          localStorage.removeItem('user_id');
-          localStorage.removeItem('email');
-          localStorage.removeItem("token");
-          if (window.location.pathname !== "/") window.location.href = "/";
+        body: JSON.stringify({ ...data.params, lang_code: "EN" }),
+      })
+        .then((response) => {
+          if (response?.status === 401) {
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("email");
+            localStorage.removeItem("token");
+            if (window.location.pathname !== "/") window.location.href = "/";
+            return;
+          } else {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          resolve(data);
           return;
-        } else {
-          return response.json();
-        }
-      }).then((data) => {
-        resolve(data)
-        return;
-      }).catch(error => {
-        // console.log(error)
-        reject(error)
-        return;
-      });
-    })
+        })
+        .catch((error) => {
+          // console.log(error)
+          reject(error);
+          return;
+        });
+    });
   },
   allAPI(data) {
     return new Promise((resolve, reject) => {
       var retrievedObject = localStorage.getItem("token");
       fetch(`${baseURL}${data.url}`, {
-        method: (data.method) ? data.method : "PUT",
+        method: data.method ? data.method : "PUT",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': (retrievedObject) ? retrievedObject : ''
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: retrievedObject ? retrievedObject : "",
         },
-        body: JSON.stringify({ ...data.params, lang_code: 'EN' })
-      }).then((response) => {
-        if (response?.status === 401) {
-          localStorage.removeItem('user_id');
-          localStorage.removeItem('email');
-          localStorage.removeItem("token");
-          if (window.location.pathname !== "/") window.location.href = "/";
+        body: JSON.stringify({ ...data.params, lang_code: "EN" }),
+      })
+        .then((response) => {
+          if (response?.status === 401) {
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("email");
+            localStorage.removeItem("token");
+            if (window.location.pathname !== "/") window.location.href = "/";
+            return;
+          } else {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          resolve(data);
           return;
-        } else {
-          return response.json();
-        }
-      }).then((data) => {
-        resolve(data)
-        return;
-      }).catch(error => {
-        reject(error)
-        return;
-      });
-    })
+        })
+        .catch((error) => {
+          reject(error);
+          return;
+        });
+    });
   },
   postFormDataAPI(data) {
     return new Promise((resolve, reject) => {
@@ -107,53 +106,56 @@ const config = {
       fetch(`${baseURL}${data.url}`, {
         method: "post",
         headers: {
-          'contentType': "application/json",
-          'Authorization': (retrievedObject) ? retrievedObject : ''
+          contentType: "application/json",
+          Authorization: retrievedObject ? retrievedObject : "",
         },
-        body: data.params
-      }).then((response) => {
-        if (response?.status === 401) {
-          localStorage.removeItem('user_id');
-          localStorage.removeItem('email');
-          localStorage.removeItem("token");
-          if (window.location.pathname !== "/") window.location.href = "/";
+        body: data.params,
+      })
+        .then((response) => {
+          if (response?.status === 401) {
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("email");
+            localStorage.removeItem("token");
+            if (window.location.pathname !== "/") window.location.href = "/";
+            return;
+          } else {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          resolve(data);
           return;
-        } else {
-          return response.json();
-        }
-      }).then((data) => {
-        resolve(data)
-        return;
-      }).catch(error => {
-        // console.log(error)
-        reject(error)
-        return;
-      });
-    })
+        })
+        .catch((error) => {
+          // console.log(error)
+          reject(error);
+          return;
+        });
+    });
   },
   getAPIaxios(data) {
     return new Promise(async (resolve, reject) => {
       try {
         var retrievedObject = localStorage.getItem("token");
         let result = await axios.get(`${baseURL}${data.url}`, {
-          params: { ...data.params, code: 'EN' },
-          headers: { 'Authorization': (retrievedObject) ? retrievedObject : '' },
+          params: { ...data.params, code: "EN" },
+          headers: { Authorization: retrievedObject ? retrievedObject : "" },
         });
-        resolve(result?.data?.payload)
+        resolve(result?.data?.payload);
         return;
       } catch (error) {
         if (error?.response?.status === 401) {
-          localStorage.removeItem('user_id');
-          localStorage.removeItem('email');
+          localStorage.removeItem("user_id");
+          localStorage.removeItem("email");
           localStorage.removeItem("token");
           if (window.location.pathname !== "/") window.location.href = "/";
         }
-        reject(error)
+        reject(error);
         return;
         // throw error;
       }
-    })
-  }
+    });
+  },
 };
 
 export default config;
