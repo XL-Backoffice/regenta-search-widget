@@ -44,10 +44,10 @@ import {
 } from "@nextui-org/react";
 import { getLocalTimeZone, today, parseDate } from "@internationalized/date";
 import LineButton from "./components/line-button";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
-import { MicrophoneIcon } from "@heroicons/react/24/solid";
+// import SpeechRecognition, {
+//   useSpeechRecognition,
+// } from "react-speech-recognition";
+// import { MicrophoneIcon } from "@heroicons/react/24/solid";
 
 const child_age = [
   { id: 1, name: "1" },
@@ -423,76 +423,76 @@ const SearchWidget = ({ initialValue }) => {
     }
   };
 
-  const [isListening, setIsListening] = useState(false);
-  const [microphoneAccess, setMicrophoneAccess] = useState(null);
+  // const [isListening, setIsListening] = useState(false);
+  // const [microphoneAccess, setMicrophoneAccess] = useState(null);
 
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
+  // const {
+  //   transcript,
+  //   listening,
+  //   resetTranscript,
+  //   browserSupportsSpeechRecognition,
+  // } = useSpeechRecognition();
 
-  useEffect(() => {
-    if (transcript) {
-      setQuery(transcript);
-      console.log("Speech to text (real-time):", transcript);
-    }
-  }, [transcript]);
+  // useEffect(() => {
+  //   if (transcript) {
+  //     setQuery(transcript);
+  //     console.log("Speech to text (real-time):", transcript);
+  //   }
+  // }, [transcript]);
 
-  useEffect(() => {
-    // Check microphone permission
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then(() => setMicrophoneAccess(true))
-      .catch(() => setMicrophoneAccess(false));
-  }, []);
+  // useEffect(() => {
+  //   // Check microphone permission
+  //   navigator.mediaDevices
+  //     .getUserMedia({ audio: true })
+  //     .then(() => setMicrophoneAccess(true))
+  //     .catch(() => setMicrophoneAccess(false));
+  // }, []);
 
-  const handleVoiceSearch = () => {
-    if (!browserSupportsSpeechRecognition) {
-      toast.error("Browser does not support speech recognition.");
-      return;
-    }
+  // const handleVoiceSearch = () => {
+  //   if (!browserSupportsSpeechRecognition) {
+  //     toast.error("Browser does not support speech recognition.");
+  //     return;
+  //   }
 
-    if (microphoneAccess === false) {
-      toast.info("Please allow microphone access to use voice search.", {
-        onClick: () => {
-          // Prompt for microphone access again
-          navigator.mediaDevices
-            .getUserMedia({ audio: true })
-            .then(() => {
-              setMicrophoneAccess(true);
-              startListening();
-            })
-            .catch(() => {
-              toast.error(
-                "Microphone access denied. Please enable it in your browser settings."
-              );
-            });
-        },
-      });
-      return;
-    }
+  //   if (microphoneAccess === false) {
+  //     toast.info("Please allow microphone access to use voice search.", {
+  //       onClick: () => {
+  //         // Prompt for microphone access again
+  //         navigator.mediaDevices
+  //           .getUserMedia({ audio: true })
+  //           .then(() => {
+  //             setMicrophoneAccess(true);
+  //             startListening();
+  //           })
+  //           .catch(() => {
+  //             toast.error(
+  //               "Microphone access denied. Please enable it in your browser settings."
+  //             );
+  //           });
+  //       },
+  //     });
+  //     return;
+  //   }
 
-    if (isListening) {
-      stopListening();
-    } else {
-      startListening();
-    }
-  };
+  //   if (isListening) {
+  //     stopListening();
+  //   } else {
+  //     startListening();
+  //   }
+  // };
 
-  const startListening = () => {
-    console.log("start listening");
-    SpeechRecognition.startListening({ continuous: true });
-    setIsListening(true);
-    resetTranscript();
-  };
+  // const startListening = () => {
+  //   console.log("start listening");
+  //   SpeechRecognition.startListening({ continuous: true });
+  //   setIsListening(true);
+  //   resetTranscript();
+  // };
 
-  const stopListening = () => {
-    console.log("stop listening");
-    SpeechRecognition.stopListening();
-    setIsListening(false);
-  };
+  // const stopListening = () => {
+  //   console.log("stop listening");
+  //   SpeechRecognition.stopListening();
+  //   setIsListening(false);
+  // };
 
   useEffect(() => {
     console.log("SearchWidget");
@@ -517,7 +517,7 @@ const SearchWidget = ({ initialValue }) => {
                       <Dialog
                         className="relative z-50"
                         onClose={() => {
-                          stopListening();
+                          // stopListening();
                           setOpenHotel(!openHotel);
                         }}
                       >
@@ -555,7 +555,7 @@ const SearchWidget = ({ initialValue }) => {
                                       searchType: "city",
                                       corporateCode: "",
                                     });
-                                    stopListening();
+                                    // stopListening();
                                     setOpenHotel(false);
                                     setOpen_mobi(true);
                                   } else if (item?.name && item?.name !== "") {
@@ -566,7 +566,7 @@ const SearchWidget = ({ initialValue }) => {
                                       searchType: "hotel",
                                       corporateCode: "",
                                     });
-                                    stopListening();
+                                    // stopListening();
                                     setOpenHotel(false);
                                     setOpen_mobi(true);
                                   }
@@ -584,7 +584,7 @@ const SearchWidget = ({ initialValue }) => {
                                     onBlur={() => setQuery("")}
                                     value={query}
                                   />
-                                  <button
+                                  {/* <button
                                     onClick={() => handleVoiceSearch()}
                                     className="absolute right-4 top-3 p-1 rounded-full hover:bg-gray-200 flex items-center"
                                   >
@@ -597,7 +597,7 @@ const SearchWidget = ({ initialValue }) => {
                                         }`}
                                       aria-hidden="true"
                                     />
-                                  </button>
+                                  </button> */}
                                 </div>
                                 {(query === "" ||
                                   filteredProjects.length > 0 ||
